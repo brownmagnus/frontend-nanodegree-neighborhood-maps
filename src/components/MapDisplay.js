@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 
 const MAP_KEY = "AIzaSyDJr5qNlchVTKRCK57F_p0RaD7S-8Vt1Z4";
+const FS_CLIENT = "A3GYPEBTVD5FLK0ELVCTSJBXB3LWMGT032U1FBRV3AVCUAFD";
+const FS_SECRET = "0D2IWO3HISEIRN2DTA15W4S2EB1QWWD2UMB2BTL2MJARGQUI";
+const FS_VERSION = "20180323"
 
 class MapDisplay extends Component {
   state = {
@@ -31,12 +34,61 @@ class MapDisplay extends Component {
     this.setState({showingInfoWindow: false, activeMarker: null, activeMarkerProps: null})
   }
 
+  getBusinessInfo = (props, data) => {
+    //look for matching place data in FourSquare check it with what we have
+    return data
+        .response
+        .venues
+        .filter(item => item.name.includes(props.name) || props.name.includes(item.name));
+  }
+
   onMarkerClick = (props, marker, e) => {
     // Close any info window already open
     this.closeInfoWindow();
 
-    // show clicked marker info InfoWindow
-    this.setState({showingInfoWindow: true, activeMarker: marker, activeMarkerProps: props})
+    // fetch the foursquare data for the selected place
+    let url = `https://api.foursquare.com/v2/venues/search?client_id=${FS_CLIENT}&client_secret=${FS_SECRET}&v=${FS_VERSION}&11=${props.position.lat},${props.position.lon}`;
+    let headers = new Headers();
+    let request = new Request(url, {
+      method: 'GET',
+      headers
+    });
+
+    //Create props for the active marker
+    let activeMarkerProps;
+    fetch(request)
+        .then(response => response.json())
+        .then(result => {
+          //Get just the business refernce for the place we want irom the foursquare
+          let placeIn = this.getBusinessInfo(props, result);
+          activeMarkerProps = {
+            ...props,
+            foursquare:  placeIn[0]
+          };
+
+          //Get the list of images for the place if we get any data from foursquare
+          if (activeMarkerProps.foursquare) {
+            let url = `https://api.foursquare.com/v2/venues/${placeIn[0].id}/photos?client_id=${FS_CLIENT}&client_secret=${FS_SECRET}&v=${FS_VERSION}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(result => {
+                    activeMarkerProps = {
+                      ...activeMarkerProps,
+                      images: result.response.photos
+                    };
+                    if(this.state.activeMarker)
+                      this.state.activeMarker.setAnimation(null);
+                    marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
+                    this.setState({showingInfoWindow: true, activeMarker: marker, activeMarkerProps: props})
+                })
+          } else {
+            marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
+            this.setState({showingInfoWindow: true, activeMarker: marker, activeMarkerProps: props})
+          }
+        })
+        // // show clicked marker info InfoWindow
+        marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
+        this.setState({showingInfoWindow: true, activeMarker: marker, activeMarkerProps: props})
   }
 
   updateMarkers = (locations) => {
@@ -105,15 +157,24 @@ class MapDisplay extends Component {
           <div>
               <h3>{inProps && inProps.name}</h3>
               <h3>{inProps && inProps.street},{inProps && inProps.city}</h3>
-              {inProps && inProps.url ? (
-                <a href={inProps.url}>See Website</a>
+              {inProps && inProps.url
+                ? (
+                    <a href={inProps.url}>See Website</a>
+                  )
+                  : ""}
+            {inProps && inProps.images
+              ? (
+                <div>
+                  <img alt={inProps.name + " picture"} src={inProps.images.items[0].prefix + "100x100" + inProps}></img>
+                    <p>Image from Foursquare</p>
+                </div>
               )
-            : ""}
+              : "No Image"
+          }
           </div>
         </InfoWindow>
     </Map>
-
-    );
+    )
   }
 }
 

@@ -70,5 +70,14 @@
     "zip": "20740",
     "url":"https://google.com",
     "pos": {"lat":39.0035232, "lng":-76.9349238}
+  },
+  {
+    "name":"Shagga Coffee & Restaurant",
+    "street": "6040 Baltimore Ave",
+    "city": "Hyattsville",
+    "state": "MD",
+    "zip": "20781",
+    "url":"https://shaggarestaurant.com",
+    "pos": {"lat":38.961298, "lng":-76.9420567}
   }
 ]
