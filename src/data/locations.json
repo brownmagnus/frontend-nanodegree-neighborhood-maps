@@ -1,0 +1,74 @@
+[
+  {
+    "name":"Global Health and Education Projects",
+    "street": "6220 Rhode Island Ave #1a",
+    "city": "Riverdale Park",
+    "state": "MD",
+    "zip": "20737",
+    "url":"https://globalhealthprojects.org",
+    "pos": {"lat":38.963166, "lng":-76.9353225}
+  },
+  {
+    "name":"The Nursing Assistant Academy",
+    "street": "5811 Baltimore Ave #101",
+    "city": "Riverdale Park",
+    "state": "MD",
+    "zip": "20737",
+    "url":"https://thenursingassistantacademy.com",
+    "pos": {"lat":38.9589649, "lng":-76.9396673}
+  },
+  {
+    "name":"The Mall at Prince Georges",
+    "street": "3500 East-West Hwy",
+    "city": "Hyattsville",
+    "state": "MD",
+    "zip": "20782",
+    "url":"https://mallatprincegeorges.com",
+    "pos": {"lat":38.9645751, "lng":-76.9561632}
+  },
+  {
+    "name":"Cesar Chavez Elementary School",
+    "street": "6609 Riggs Rd",
+    "city": "Chillum",
+    "state": "MD",
+    "zip": "20782",
+    "url":"https://pgcps.org",
+    "pos": {"lat":38.9705953, "lng":-76.9816188}
+  },
+  {
+    "name":"Rollingcrest-Chillum Community Center",
+    "street": "6120 Sargent Rd",
+    "city": "Chillum",
+    "state": "MD",
+    "zip": "20782",
+    "url":"https://pgparks.com",
+    "pos": {"lat":38.9647171, "lng":-76.9851825}
+  },
+  {
+    "name":"Jelani Consulting",
+    "street": "6301 Ivy Ln #100",
+    "city": "Greenbelt",
+    "state": "MD",
+    "zip": "20770",
+    "url":"https://jelaniconsulting.com",
+    "pos": {"lat":39.008685, "lng":-76.8993248}
+  },
+  {
+    "name":"University of Maryland",
+    "street": "College Park",
+    "city": "College Park",
+    "state": "MD",
+    "zip": "20742",
+    "url":"https://umd.edu",
+    "pos": {"lat":38.9869224, "lng":-76.944743}
+  },
+  {
+    "name":"China Buffet",
+    "street": "9098 Baltimore Ave",
+    "city": "College Park",
+    "state": "MD",
+    "zip": "20740",
+    "url":"https://google.com",
+    "pos": {"lat":39.0035232, "lng":-76.9349238}
+  }
+]
