@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 
-const MAP_KEY = "AIzaSyDJr5qNlchVTKRCK57F_p0RaD7S-8Vt1Z4";
+
+let mkeyOne = "AIzaSyDJr5qNlchVTKRCK57";
+let mkeyTwo = "F_p0RaD7S-8Vt1Z4"
+const MAP_KEY = mkeyOne+mkeyTwo;
 const FS_CLIENT = "A3GYPEBTVD5FLK0ELVCTSJBXB3LWMGT032U1FBRV3AVCUAFD";
 const FS_SECRET = "0D2IWO3HISEIRN2DTA15W4S2EB1QWWD2UMB2BTL2MJARGQUI";
 const FS_VERSION = "20180323"
