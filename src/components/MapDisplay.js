@@ -36,10 +36,7 @@ class MapDisplay extends Component {
 
   getBusinessInfo = (props, data) => {
     //look for matching place data in FourSquare check it with what we have
-    return data
-        .response
-        .venues
-        .filter(item => item.name.includes(props.name) || props.name.includes(item.name));
+    return data.response.venues.filter(item => item.name.includes(props.name) || props.name.includes(item.name));
   }
 
   onMarkerClick = (props, marker, e) => {
@@ -47,7 +44,7 @@ class MapDisplay extends Component {
     this.closeInfoWindow();
 
     // fetch the foursquare data for the selected place
-    let url = `https://api.foursquare.com/v2/venues/search?client_id=${FS_CLIENT}&client_secret=${FS_SECRET}&v=${FS_VERSION}&11=${props.position.lat},${props.position.lon}`;
+    let url = `https://api.foursquare.com/v2/venues/search?client_id=${FS_CLIENT}&client_secret=${FS_SECRET}&v=${FS_VERSION}&ll=${props.position.lat},${props.position.lng}`;
     let headers = new Headers();
     let request = new Request(url, {
       method: 'GET',
@@ -58,8 +55,9 @@ class MapDisplay extends Component {
     let activeMarkerProps;
     fetch(request)
         .then(response => response.json())
-        .then(result => {
+        .then( result => {
           //Get just the business refernce for the place we want irom the foursquare
+
           let placeIn = this.getBusinessInfo(props, result);
           activeMarkerProps = {
             ...props,
@@ -79,7 +77,7 @@ class MapDisplay extends Component {
                     if(this.state.activeMarker)
                       this.state.activeMarker.setAnimation(null);
                     marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
-                    this.setState({showingInfoWindow: true, activeMarker: marker, activeMarkerProps: props})
+                    this.setState({showingInfoWindow: true, activeMarker: marker, activeMarkerProps})
                 })
           } else {
             marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
@@ -87,8 +85,8 @@ class MapDisplay extends Component {
           }
         })
         // // show clicked marker info InfoWindow
-        marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
-        this.setState({showingInfoWindow: true, activeMarker: marker, activeMarkerProps: props})
+        //marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
+        //this.setState({showingInfoWindow: true, activeMarker: marker, activeMarkerProps: props})
   }
 
   updateMarkers = (locations) => {
@@ -165,7 +163,8 @@ class MapDisplay extends Component {
             {inProps && inProps.images
               ? (
                 <div>
-                  <img alt={inProps.name + " picture"} src={inProps.images.items[0].prefix + "100x100" + inProps}></img>
+                  <img alt={inProps.name + " picture"}
+                  src={inProps.images.items[0].prefix + "100x100" + inProps.images.items[0].suffix}/>
                     <p>Image from Foursquare</p>
                 </div>
               )
