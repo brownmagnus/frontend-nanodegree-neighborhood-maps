@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import locations from './data/locations.json';
 import MapDisplay from './components/MapDisplay';
+import ListDisplay from './components/ListDisplay';
 
 class App extends Component {
   state = {
@@ -51,7 +52,10 @@ class App extends Component {
             lon={this.state.lon}
             zoom={this.state.zoom}
             locations={this.state.all}/>
-
+          <ListDisplay
+            locations={this.state.all}
+            open={this.state.open}
+            toggleDisplay={this.toggleDisplay}/>
         </div>
       </div>
 

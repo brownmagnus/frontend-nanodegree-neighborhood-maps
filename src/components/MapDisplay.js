@@ -154,7 +154,7 @@ class MapDisplay extends Component {
           onClose={this.closeInfoWindow}>
           <div>
               <h3>{inProps && inProps.name}</h3>
-              <h3>{inProps && inProps.street},{inProps && inProps.city}</h3>
+              <h3>{inProps && inProps.street}, {inProps && inProps.city}</h3>
               {inProps && inProps.url
                 ? (
                     <a href={inProps.url}>See Website</a>
@@ -164,11 +164,11 @@ class MapDisplay extends Component {
               ? (
                 <div>
                   <img alt={inProps.name + " picture"}
-                  src={inProps.images.items[0].prefix + "100x100" + inProps.images.items[0].suffix}/>
+                  src={inProps.images.items[0].prefix + "200x200" + inProps.images.items[0].suffix}/>
                     <p>Image from Foursquare</p>
                 </div>
               )
-              : "No Image"
+              : ""
           }
           </div>
         </InfoWindow>
