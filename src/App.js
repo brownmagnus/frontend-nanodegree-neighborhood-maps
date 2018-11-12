@@ -10,6 +10,7 @@ class App extends Component {
     lon: -76.9353225,
     zoom: 13,
     all: locations,
+    filtered: null,
     open: false
   }
 
@@ -31,10 +32,32 @@ class App extends Component {
     }
   };
 
+  componentDidMount = () => {
+    this.setState({
+      ...this.setState,
+      filtered: this.filterLocations(this.state.all, "")
+    });
+  }
+
   toggleDisplay = () => {
+    // Toggle the source of true value for the drawer display
     this.setState({
       open: !this.state.open
     });
+  }
+
+  updateQuery = (query) => {
+    // Update the query value and filter the list of locations
+    this.setState({
+      ...this.state,
+      selectedIndex: null,
+      filtered: this.filterLocations(this.state.all, query)
+    });
+  }
+
+  filterLocations = (locations, query) => {
+    // Filter location to match string query
+    return locations.filter(location => location.name.toLowerCase().includes(query.toLowerCase()));
   }
 
   render = () => {
@@ -51,11 +74,12 @@ class App extends Component {
             lat={this.state.lat}
             lon={this.state.lon}
             zoom={this.state.zoom}
-            locations={this.state.all}/>
+            locations={this.state.filtered}/>
           <ListDisplay
-            locations={this.state.all}
+            locations={this.state.filtered}
             open={this.state.open}
-            toggleDisplay={this.toggleDisplay}/>
+            toggleDisplay={this.toggleDisplay}
+            filterLocations={this.updateQuery}/>
         </div>
       </div>
 

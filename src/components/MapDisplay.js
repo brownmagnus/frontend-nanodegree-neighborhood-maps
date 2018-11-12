@@ -19,7 +19,27 @@ class MapDisplay extends Component {
     showingInfoWindow: false
   };
 
-  componentDidMount = () => {
+  componentDidMount = () => {}
+
+  componentsWillReceiveProps = (props) => {
+    this.setState({firstDrop: false});
+
+    if (this.state.markers.length !== props.location.length) {
+      this.closeInfoWindow();
+      this.updateMarkers(props.locations);
+      this.setState({activeMarker: null});
+
+      return;
+    }
+
+    if (!props.selectedIndex || (this.state.activeMarker &&
+    (this.state.markers[props.selectedIndex] !== this.state.activeMarker))) {
+      this.closeInforWindow();
+    }
+
+    if (props.selectedIndex === null || typeof(props.selectedIndex)  === "undefined") {
+      return;
+    };
   }
 
   mapReady = (props, map) => {
