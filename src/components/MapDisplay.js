@@ -21,10 +21,10 @@ class MapDisplay extends Component {
 
   componentDidMount = () => {}
 
-  componentsWillReceiveProps = (props) => {
+  componentWillReceiveProps = (props) => {
     this.setState({firstDrop: false});
 
-    if (this.state.markers.length !== props.location.length) {
+    if (this.state.markers.length !== props.locations.length) {
       this.closeInfoWindow();
       this.updateMarkers(props.locations);
       this.setState({activeMarker: null});
@@ -34,12 +34,14 @@ class MapDisplay extends Component {
 
     if (!props.selectedIndex || (this.state.activeMarker &&
     (this.state.markers[props.selectedIndex] !== this.state.activeMarker))) {
-      this.closeInforWindow();
+      this.closeInfoWindow();
     }
 
     if (props.selectedIndex === null || typeof(props.selectedIndex)  === "undefined") {
       return;
     };
+
+    this.onMarkerClick(this.state.markerProps[props.selectedIndex], this.state.markers[props.selectedIndex]);
   }
 
   mapReady = (props, map) => {

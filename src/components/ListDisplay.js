@@ -57,7 +57,7 @@ class ListDisplay extends Component {
                 {this.props.locations && this.props.locations.map((location, index) => {
                     return (
                       <li style={this.styles.listItem} key={index}>
-                          <button style={this.styles.listLink} key={index}>{location.name}</button>
+                          <button onClick={e => this.props.clickListItem(index)} style={this.styles.listLink} key={index}>{location.name}</button>
                       </li>
                     )
                   })}
