@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 
+import MapErrorDisplay from './MapErrorDisplay';
+
 
 let mkeyOne = "AIzaSyDJr5qNlchVTKRCK57";
 let mkeyTwo = "F_p0RaD7S-8Vt1Z4"
@@ -202,4 +204,4 @@ class MapDisplay extends Component {
   }
 }
 
-export default GoogleApiWrapper({apiKey: MAP_KEY})(MapDisplay)
+export default GoogleApiWrapper({apiKey: MAP_KEY, LoadingContainer: MapErrorDisplay})(MapDisplay)

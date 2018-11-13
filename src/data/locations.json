@@ -54,15 +54,6 @@
     "pos": {"lat":39.008685, "lng":-76.8993248}
   },
   {
-    "name":"University of Maryland",
-    "street": "College Park",
-    "city": "College Park",
-    "state": "MD",
-    "zip": "20742",
-    "url":"https://umd.edu",
-    "pos": {"lat":38.9869224, "lng":-76.944743}
-  },
-  {
     "name":"China Buffet",
     "street": "9098 Baltimore Ave",
     "city": "College Park",
