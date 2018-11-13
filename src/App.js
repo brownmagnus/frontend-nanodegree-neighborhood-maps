@@ -14,24 +14,6 @@ class App extends Component {
     open: false
   }
 
-  styles = {
-    menuButton: {
-      marginLeft: 10,
-      marginRight: 20,
-      position: "absolute",
-      left: 10,
-      top: 20,
-      backgroud: "white",
-      padding: 10
-    },
-    hide: {
-      display: "none"
-    },
-    header: {
-      marginTop: "0px"
-    }
-  };
-
   componentDidMount = () => {
     this.setState({
       ...this.setState,
@@ -69,10 +51,10 @@ class App extends Component {
     return (
       <div className="App">
         <div>
-          <button onClick={this.toggleDisplay} style={this.styles.menuButton}>
+          <button onClick={this.toggleDisplay} className="menu-button">
             <i className="fa fa-bars"></i>
           </button>
-          <h1>Brownia's Neighborhood Map</h1>
+          <h1>Neighborhood Map</h1>
         </div>
         <div>
           <MapDisplay
